@@ -48,6 +48,10 @@ To use this module you have to deploy also:
 | [wcm.io WCM Commons](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.wcm.commons) | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.wcm.commons/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.wcm.commons) |
 
 
+### GitHub Repository
+
+Sources: https://github.com/wcm-io/io.wcm.wcm.parsys
+
 
 [usage]: usage.html
 [apidocs]: apidocs/
