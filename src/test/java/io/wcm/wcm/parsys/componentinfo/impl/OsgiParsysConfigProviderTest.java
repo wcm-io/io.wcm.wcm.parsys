@@ -85,6 +85,7 @@ class OsgiParsysConfigProviderTest {
   }
 
   @Test
+  @SuppressWarnings("unused")
   void testWithoutProperties() {
     ParsysConfig underTest = context.registerInjectActivateService(new OsgiParsysConfigProvider());
 

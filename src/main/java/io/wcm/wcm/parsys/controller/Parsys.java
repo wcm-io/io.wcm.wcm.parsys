@@ -360,6 +360,7 @@ public final class Parsys implements ContainerExporter {
     return Arrays.copyOf(exportedItemsOrder, exportedItemsOrder.length);
   }
 
+  @SuppressWarnings("null")
   private <T> Map<String, T> getChildModels(@NotNull Class<T> modelClass) {
     Map<String, T> models = new LinkedHashMap<>();
     for (Resource child : slingModelFilter.filterChildResources(currentResource.getChildren())) {
