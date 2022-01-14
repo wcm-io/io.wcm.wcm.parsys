@@ -95,7 +95,7 @@ public final class AllowedComponentsProviderImpl implements AllowedComponentsPro
     for (ParsysConfig pathDef : parSysConfigs) {
 
       boolean includePathDef = false;
-      if (pathDef.getAllowedParents().size() == 0) {
+      if (pathDef.getAllowedParents().isEmpty()) {
         includePathDef = true;
       }
       else {

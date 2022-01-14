@@ -31,13 +31,11 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.commons.osgi.Order;
 import org.apache.sling.commons.osgi.RankedServices;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
@@ -73,9 +71,7 @@ public final class ParsysConfigManagerImpl implements ParsysConfigManager {
   public @NotNull Iterable<ParsysConfig> getParsysConfigs(@NotNull final String pageComponentPath, @NotNull final String relativePath,
       @NotNull final ResourceResolver resolver) {
     Iterable<ParsysConfig> configs = getParsysConfigs(pageComponentPath, resolver);
-    return Iterables.filter(configs, new Predicate<ParsysConfig>() {
-      @Override
-      public boolean apply(@Nullable ParsysConfig parsysConfig) {
+    return Iterables.filter(configs, parsysConfig -> {
         // sanity check
         if (parsysConfig == null || parsysConfig.getPathPattern() == null) {
           return false;
@@ -85,7 +81,6 @@ public final class ParsysConfigManagerImpl implements ParsysConfigManager {
           return false;
         }
         return pathPattern.matcher(relativePath).matches();
-      }
     });
   }
 
@@ -134,10 +129,8 @@ public final class ParsysConfigManagerImpl implements ParsysConfigManager {
 
   private boolean existingPathParentConfigAllowsInheritance(ParsysConfig item, List<ParsysConfig> existingItems) {
     for (ParsysConfig existingItem : existingItems) {
-      if (matchesPathParent(item, existingItem)) {
-        if (!existingItem.isInherit()) {
-          return false;
-        }
+      if (matchesPathParent(item, existingItem) && !existingItem.isInherit()) {
+        return false;
       }
     }
     return true;
