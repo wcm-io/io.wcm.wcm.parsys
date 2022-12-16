@@ -19,6 +19,7 @@
  */
 package io.wcm.wcm.parsys.componentinfo.impl;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -36,7 +37,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.day.cq.commons.jcr.JcrConstants;
-import com.google.common.collect.ImmutableSet;
 
 import io.wcm.wcm.parsys.componentinfo.ParsysConfig;
 
@@ -174,7 +174,7 @@ public final class OsgiParsysConfigProvider implements ParsysConfig {
         }
       }
     }
-    this.allowedChildren = ImmutableSet.copyOf(allowedChildrenSet);
+    this.allowedChildren = Collections.unmodifiableSet(allowedChildrenSet);
 
     // set denied children
     Set<String> deniedChildrenSet = new HashSet<>();
@@ -185,7 +185,7 @@ public final class OsgiParsysConfigProvider implements ParsysConfig {
         }
       }
     }
-    this.deniedChildren = ImmutableSet.copyOf(deniedChildrenSet);
+    this.deniedChildren = Collections.unmodifiableSet(deniedChildrenSet);
 
     // set allowed parents
     Set<String> allowedParentsSet = new HashSet<>();
@@ -196,7 +196,7 @@ public final class OsgiParsysConfigProvider implements ParsysConfig {
         }
       }
     }
-    this.allowedParents = ImmutableSet.copyOf(allowedParentsSet);
+    this.allowedParents = Collections.unmodifiableSet(allowedParentsSet);
 
     this.inherit = config.inherit();
 

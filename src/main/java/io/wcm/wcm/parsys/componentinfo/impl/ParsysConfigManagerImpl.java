@@ -21,10 +21,12 @@ package io.wcm.wcm.parsys.componentinfo.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -35,9 +37,6 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
 import io.wcm.sling.commons.resource.ResourceType;
 import io.wcm.wcm.parsys.componentinfo.ParsysConfig;
@@ -60,10 +59,10 @@ public final class ParsysConfigManagerImpl implements ParsysConfigManager {
   public @NotNull Iterable<ParsysConfig> getParsysConfigs(@NotNull String pageComponentPath, @NotNull ResourceResolver resolver) {
     Resource pageComponentResource = resolver.getResource(pageComponentPath);
     if (pageComponentResource != null) {
-      return ImmutableList.copyOf(getParsysConfigsWithInheritance(pageComponentResource, resolver));
+      return Collections.unmodifiableCollection(getParsysConfigsWithInheritance(pageComponentResource, resolver));
     }
     else {
-      return ImmutableList.<ParsysConfig>of();
+      return Collections.emptyList();
     }
   }
 
@@ -71,7 +70,7 @@ public final class ParsysConfigManagerImpl implements ParsysConfigManager {
   public @NotNull Iterable<ParsysConfig> getParsysConfigs(@NotNull final String pageComponentPath, @NotNull final String relativePath,
       @NotNull final ResourceResolver resolver) {
     Iterable<ParsysConfig> configs = getParsysConfigs(pageComponentPath, resolver);
-    return Iterables.filter(configs, parsysConfig -> {
+    return IterableUtils.filteredIterable(configs, parsysConfig -> {
         // sanity check
         if (parsysConfig == null || parsysConfig.getPathPattern() == null) {
           return false;
