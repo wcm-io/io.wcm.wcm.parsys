@@ -2,7 +2,7 @@
 
 AEM paragraph system based on path configuration in page components.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.wcm.parsys/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.wcm.parsys)
+[![Maven Central](https://img.shields.io/maven-central/v/io.wcm/io.wcm.wcm.parsys)](https://repo1.maven.org/maven2/io/wcm/io.wcm.wcm.parsys/)
 
 
 ### Documentation
@@ -30,7 +30,8 @@ Differences to the AEM-builtin paragraph system:
 
 |WCM Parsys version |AEM version supported
 |-------------------|----------------------
-|1.6.x or higher    |AEM 6.4.5+, AEMaaCS
+|1.7.x or higher    |AEM 6.5.7+, AEMaaCS
+|1.6.x              |AEM 6.4.5+, AEMaaCS
 |1.4.x - 1.5.x      |AEM 6.3.3+, AEM 6.4.5+
 |1.2.x - 1.3.x      |AEM 6.2+
 |1.0.x - 1.1.x      |AEM 6.1+
@@ -42,10 +43,14 @@ Differences to the AEM-builtin paragraph system:
 To use this module you have to deploy also:
 
 |---|---|---|
-| [wcm.io Sling Commons](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.sling.commons) | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.sling.commons/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.sling.commons) |
-| [wcm.io AEM Sling Models Extensions](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.sling.models) | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.sling.models/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.sling.models) |
-| [wcm.io WCM Commons](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.wcm.commons) | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.wcm.commons/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.wcm/io.wcm.wcm.commons) |
+| [wcm.io Sling Commons](https://repo1.maven.org/maven2/io/wcm/io.wcm.sling.commons/) | [![Maven Central](https://img.shields.io/maven-central/v/io.wcm/io.wcm.sling.commons)](https://repo1.maven.org/maven2/io/wcm/io.wcm.sling.commons/) |
+| [wcm.io AEM Sling Models Extensions](https://repo1.maven.org/maven2/io/wcm/io.wcm.sling.models/) | [![Maven Central](https://img.shields.io/maven-central/v/io.wcm/io.wcm.sling.models)](https://repo1.maven.org/maven2/io/wcm/io.wcm.sling.models/) |
+| [wcm.io WCM Commons](https://repo1.maven.org/maven2/io/wcm/io.wcm.wcm.commons/) | [![Maven Central](https://img.shields.io/maven-central/v/io.wcm/io.wcm.wcm.commons)](https://repo1.maven.org/maven2/io/wcm/io.wcm.wcm.commons/) |
 
+
+### GitHub Repository
+
+Sources: https://github.com/wcm-io/io.wcm.wcm.parsys
 
 
 [usage]: usage.html

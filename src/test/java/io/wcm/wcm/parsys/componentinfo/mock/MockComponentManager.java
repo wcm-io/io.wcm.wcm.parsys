@@ -23,6 +23,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -31,7 +32,6 @@ import org.apache.sling.models.annotations.Model;
 
 import com.day.cq.wcm.api.components.Component;
 import com.day.cq.wcm.api.components.ComponentManager;
-import com.google.common.collect.ImmutableList;
 
 /**
  * Mocked WCM API component manager returning two mocked components.
@@ -55,10 +55,9 @@ public class MockComponentManager implements ComponentManager {
 
   @Override
   public Collection<Component> getComponents() {
-    return ImmutableList.of(
+    return List.of(
         mockComponent(COMPONENT_PATH_1),
-        mockComponent(COMPONENT_PATH_2)
-        );
+        mockComponent(COMPONENT_PATH_2));
   }
 
   private Component mockComponent(String path) {

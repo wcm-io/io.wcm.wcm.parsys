@@ -29,8 +29,6 @@ import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import com.google.common.collect.ImmutableSet;
-
 import io.wcm.testing.mock.aem.junit5.AemContext;
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
 import io.wcm.wcm.parsys.componentinfo.ParsysConfig;
@@ -41,9 +39,9 @@ import io.wcm.wcm.parsys.textcontext.AppAemContext;
 class OsgiParsysConfigProviderTest {
 
   private static final String COMPONENT_PATH = "/component/path";
-  private static final Set<String> ALLOWED_PARENTS = ImmutableSet.of("/parent1", "/parent2");
-  private static final Set<String> ALLOWED_CHILDREN = ImmutableSet.of("/child1", "/child2");
-  private static final Set<String> DENIED_CHILDREN = ImmutableSet.of("/child3");
+  private static final Set<String> ALLOWED_PARENTS = Set.of("/parent1", "/parent2");
+  private static final Set<String> ALLOWED_CHILDREN = Set.of("/child1", "/child2");
+  private static final Set<String> DENIED_CHILDREN = Set.of("/child3");
 
   private final AemContext context = AppAemContext.newAemContext();
 
@@ -85,6 +83,7 @@ class OsgiParsysConfigProviderTest {
   }
 
   @Test
+  @SuppressWarnings("unused")
   void testWithoutProperties() {
     ParsysConfig underTest = context.registerInjectActivateService(new OsgiParsysConfigProvider());
 

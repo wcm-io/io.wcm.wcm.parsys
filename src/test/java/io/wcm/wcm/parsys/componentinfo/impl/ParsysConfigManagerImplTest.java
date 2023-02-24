@@ -26,14 +26,13 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections4.IterableUtils;
 import org.apache.sling.api.SlingConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import com.google.common.collect.Lists;
 
 import io.wcm.sling.commons.resource.ImmutableValueMap;
 import io.wcm.testing.mock.aem.junit5.AemContext;
@@ -82,11 +81,11 @@ class ParsysConfigManagerImplTest {
   void testGetPageComponentFromOsgi_RelativePath() {
     List<ParsysConfig> configs;
 
-    configs = Lists.newArrayList(underTest.getParsysConfigs(RESOURCE_PATH_1, context.resourceResolver()));
+    configs = IterableUtils.toList(underTest.getParsysConfigs(RESOURCE_PATH_1, context.resourceResolver()));
     assertEquals(1, configs.size());
     assertSame(parsysConfig1, configs.get(0));
 
-    configs = Lists.newArrayList(underTest.getParsysConfigs(RESOURCE_PATH_2, context.resourceResolver()));
+    configs = IterableUtils.toList(underTest.getParsysConfigs(RESOURCE_PATH_2, context.resourceResolver()));
     assertEquals(2, configs.size());
     assertSame(parsysConfig2, configs.get(0));
     assertSame(parsysConfig1, configs.get(1));
@@ -96,11 +95,11 @@ class ParsysConfigManagerImplTest {
   void testGetPageComponentFromOsgi_AbsolutePath() {
     List<ParsysConfig> configs;
 
-    configs = Lists.newArrayList(underTest.getParsysConfigs("/apps/" + RESOURCE_PATH_1, context.resourceResolver()));
+    configs = IterableUtils.toList(underTest.getParsysConfigs("/apps/" + RESOURCE_PATH_1, context.resourceResolver()));
     assertEquals(1, configs.size());
     assertSame(parsysConfig1, configs.get(0));
 
-    configs = Lists.newArrayList(underTest.getParsysConfigs("/apps/" + RESOURCE_PATH_2, context.resourceResolver()));
+    configs = IterableUtils.toList(underTest.getParsysConfigs("/apps/" + RESOURCE_PATH_2, context.resourceResolver()));
     assertEquals(2, configs.size());
     assertSame(parsysConfig2, configs.get(0));
     assertSame(parsysConfig1, configs.get(1));
@@ -110,20 +109,20 @@ class ParsysConfigManagerImplTest {
   void testGetPageComponentRelativePathFromOsgi() {
     List<ParsysConfig> configs;
 
-    configs = Lists.newArrayList(underTest.getParsysConfigs(RESOURCE_PATH_1, "jcr:content/path0", context.resourceResolver()));
+    configs = IterableUtils.toList(underTest.getParsysConfigs(RESOURCE_PATH_1, "jcr:content/path0", context.resourceResolver()));
     assertEquals(0, configs.size());
 
-    configs = Lists.newArrayList(underTest.getParsysConfigs(RESOURCE_PATH_2, "jcr:content/path1", context.resourceResolver()));
+    configs = IterableUtils.toList(underTest.getParsysConfigs(RESOURCE_PATH_2, "jcr:content/path1", context.resourceResolver()));
     assertEquals(1, configs.size());
     assertSame(parsysConfig1, configs.get(0));
 
-    configs = Lists.newArrayList(underTest.getParsysConfigs(RESOURCE_PATH_2, "jcr:content/path2", context.resourceResolver()));
+    configs = IterableUtils.toList(underTest.getParsysConfigs(RESOURCE_PATH_2, "jcr:content/path2", context.resourceResolver()));
     assertEquals(1, configs.size());
     assertSame(parsysConfig2, configs.get(0));
 
-    configs = Lists.newArrayList(underTest.getParsysConfigs(RESOURCE_PATH_2, "jcr:content/xxx/path1", context.resourceResolver()));
+    configs = IterableUtils.toList(underTest.getParsysConfigs(RESOURCE_PATH_2, "jcr:content/xxx/path1", context.resourceResolver()));
     assertEquals(0, configs.size());
-    configs = Lists.newArrayList(underTest.getParsysConfigs(RESOURCE_PATH_2, "jcr:content/xxx/path2/yyy", context.resourceResolver()));
+    configs = IterableUtils.toList(underTest.getParsysConfigs(RESOURCE_PATH_2, "jcr:content/xxx/path2/yyy", context.resourceResolver()));
     assertEquals(1, configs.size());
     assertSame(parsysConfig2, configs.get(0));
   }

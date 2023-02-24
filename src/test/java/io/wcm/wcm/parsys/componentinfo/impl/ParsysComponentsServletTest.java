@@ -24,6 +24,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.sling.api.resource.ResourceResolver;
@@ -36,7 +39,6 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
 import com.day.cq.wcm.api.Page;
-import com.google.common.collect.ImmutableSortedSet;
 
 import io.wcm.sling.commons.resource.ImmutableValueMap;
 import io.wcm.testing.mock.aem.junit5.AemContext;
@@ -72,7 +74,7 @@ class ParsysComponentsServletTest {
 
     when(allowedComponentsProvider.getAllowedComponents(any(Page.class),
         eq(LOCAL_PATH), eq(RESOURCE_TYPE), any(ResourceResolver.class)))
-        .thenReturn(ImmutableSortedSet.of("sample/components/comp1", "sample/components/comp2"));
+            .thenReturn(new TreeSet<>(Set.of("sample/components/comp1", "sample/components/comp2")));
 
     context.registerService(AllowedComponentsProvider.class, allowedComponentsProvider);
   }

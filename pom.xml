@@ -24,14 +24,14 @@
 
   <parent>
     <groupId>io.wcm</groupId>
-    <artifactId>io.wcm.wcm.parent</artifactId>
-    <version>1.4.8</version>
-    <relativePath>../parent/pom.xml</relativePath>
+    <artifactId>io.wcm.parent_toplevel</artifactId>
+    <version>2.2.0</version>
+    <relativePath/>
   </parent>
 
   <groupId>io.wcm</groupId>
   <artifactId>io.wcm.wcm.parsys</artifactId>
-  <version>1.6.8</version>
+  <version>1.7.0</version>
   <packaging>jar</packaging>
 
   <name>WCM Parsys</name>
@@ -39,9 +39,9 @@
   <url>${site.url}/${site.url.module.prefix}/</url>
 
   <scm>
-    <connection>scm:git:https://github.com/wcm-io/wcm-io-wcm.git</connection>
-    <developerConnection>scm:git:https://github.com/wcm-io/wcm-io-wcm.git</developerConnection>
-    <url>https://github.com/wcm-io/wcm-io-wcm</url>
+    <connection>scm:git:https://github.com/wcm-io/io.wcm.wcm.parsys.git</connection>
+    <developerConnection>scm:git:https://github.com/wcm-io/io.wcm.wcm.parsys.git</developerConnection>
+    <url>https://github.com/wcm-io/io.wcm.wcm.parsys</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -49,7 +49,7 @@
     <site.url.module.prefix>wcm/parsys</site.url.module.prefix>
 
     <!-- Enable reproducible builds -->
-    <project.build.outputTimestamp>2021-10-28T13:26:14Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2023-02-24T15:09:30Z</project.build.outputTimestamp>
   </properties>
 
   <dependencies>
@@ -109,7 +109,7 @@
     <dependency>
       <groupId>io.wcm</groupId>
       <artifactId>io.wcm.testing.aem-mock.junit5</artifactId>
-      <version>4.0.2</version>
+      <version>5.0.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -131,10 +131,9 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- For build compatibility with Java 11 -->
     <dependency>
-      <groupId>org.apache.geronimo.specs</groupId>
-      <artifactId>geronimo-annotation_1.3_spec</artifactId>
+      <groupId>com.adobe.aem</groupId>
+      <artifactId>uber-jar</artifactId>
       <scope>provided</scope>
     </dependency>
 
@@ -150,7 +149,12 @@
         <configuration>
           <bnd>
             Sling-Initial-Content: SLING-INF/app-root;overwrite:=true;ignoreImportProviders:=xml;path:=/apps/wcm-io/wcm/parsys
-            Sling-Namespaces: wcmio=http://wcm.io/ns
+
+            Sling-Namespaces: \
+              wcmio=http://wcm.io/ns,\
+              cq=http://www.day.com/jcr/cq/1.0,\
+              granite=http://www.adobe.com/jcr/granite/1.0,\
+              sling=http://sling.apache.org/jcr/sling/1.0
 
             <!-- For build compatibility with Java 11 -->
             Import-Package: \
@@ -173,13 +177,30 @@
         </configuration>
       </plugin>
 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <topSiteURL>${site.deploy.url}</topSiteURL>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-publish-plugin</artifactId>
+        <configuration>
+          <subDirectory>${site.url.module.prefix}</subDirectory>
+          <skipDeletedFiles>true</skipDeletedFiles>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 
   <distributionManagement>
     <site>
       <id>${site.deploy.id}</id>
-      <url>${site.deploy.url}/${site.url.module.prefix}</url>
+      <url>${site.deploy.url}</url>
     </site>
   </distributionManagement>
   

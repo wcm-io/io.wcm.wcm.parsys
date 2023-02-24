@@ -115,7 +115,7 @@ public final class ParsysComponentsServlet extends SlingSafeMethodsServlet {
       Set<String> allowed = allowedComponentsProvider.getAllowedComponents(currentPage, relativePath, resourceType, resolver);
 
       // create set with relative resource type paths
-      Set<String> allowedComponentsRelative = new TreeSet<String>();
+      Set<String> allowedComponentsRelative = new TreeSet<>();
       for (String allowedResourceType : allowed) {
         allowedComponentsRelative.add(ResourceType.makeAbsolute(allowedResourceType, resolver));
       }
@@ -129,7 +129,7 @@ public final class ParsysComponentsServlet extends SlingSafeMethodsServlet {
     if (log.isDebugEnabled()) {
       long endTime = System.currentTimeMillis();
       long duration = endTime - startTime;
-      log.debug("ParsysComponentsServlet for " + currentPage.getPath() + "/" + relativePath + " took " + duration + "ms");
+      log.debug("ParsysComponentsServlet for {}/{} took {}ms", currentPage.getPath(), relativePath, duration);
     }
   }
 

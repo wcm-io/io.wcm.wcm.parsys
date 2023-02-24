@@ -36,7 +36,6 @@ import org.apache.sling.api.resource.ValueMap;
 import org.jetbrains.annotations.NotNull;
 
 import com.day.cq.commons.jcr.JcrConstants;
-import com.google.common.collect.ImmutableSet;
 
 import io.wcm.wcm.parsys.componentinfo.ParsysConfig;
 
@@ -123,9 +122,9 @@ final class ResourceParsysConfigProvider {
       }
 
       // get allowed children/denied children/parents
-      this.allowedChildren = ImmutableSet.copyOf(pathDefProps.get(PN_ALLOWEDCHILDREN, ArrayUtils.EMPTY_STRING_ARRAY));
-      this.deniedChildren = ImmutableSet.copyOf(pathDefProps.get(PN_DENIEDDCHILDREN, ArrayUtils.EMPTY_STRING_ARRAY));
-      this.allowedParents = ImmutableSet.copyOf(pathDefProps.get(PN_ALLOWEDPARENTS, ArrayUtils.EMPTY_STRING_ARRAY));
+      this.allowedChildren = Set.of(pathDefProps.get(PN_ALLOWEDCHILDREN, ArrayUtils.EMPTY_STRING_ARRAY));
+      this.deniedChildren = Set.of(pathDefProps.get(PN_DENIEDDCHILDREN, ArrayUtils.EMPTY_STRING_ARRAY));
+      this.allowedParents = Set.of(pathDefProps.get(PN_ALLOWEDPARENTS, ArrayUtils.EMPTY_STRING_ARRAY));
 
       // ancestor level
       this.parentAncestorLevel = pathDefProps.get(PN_PARENTANCESTORLEVEL, 1);

@@ -19,6 +19,7 @@
  */
 package io.wcm.wcm.parsys.componentinfo.impl;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.SortedSet;
@@ -35,7 +36,6 @@ import org.osgi.service.component.annotations.Reference;
 import com.day.cq.commons.jcr.JcrConstants;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
-import com.google.common.collect.ImmutableSet;
 
 import io.wcm.sling.commons.adapter.AdaptTo;
 import io.wcm.wcm.parsys.componentinfo.AllowedComponentsProvider;
@@ -65,7 +65,7 @@ public final class AllowedComponentsProviderImpl implements AllowedComponentsPro
       page = pageManager.getPage(StringUtils.substringBefore(resourcePath, "/" + JcrConstants.JCR_CONTENT));
     }
     if (page == null) {
-      return ImmutableSet.of();
+      return Collections.emptySet();
     }
     String relativePath = StringUtils.substringAfter(resourcePath, page.getPath() + "/");
     return getAllowedComponents(page, relativePath, null, resolver);
@@ -95,7 +95,7 @@ public final class AllowedComponentsProviderImpl implements AllowedComponentsPro
     for (ParsysConfig pathDef : parSysConfigs) {
 
       boolean includePathDef = false;
-      if (pathDef.getAllowedParents().size() == 0) {
+      if (pathDef.getAllowedParents().isEmpty()) {
         includePathDef = true;
       }
       else {
@@ -156,7 +156,7 @@ public final class AllowedComponentsProviderImpl implements AllowedComponentsPro
       return allowedChildren;
     }
     // fallback
-    return ImmutableSet.of();
+    return Collections.emptySet();
   }
 
 }
