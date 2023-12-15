@@ -20,6 +20,8 @@
 package io.wcm.wcm.parsys.componentinfo.impl;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -41,6 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.wcm.sling.commons.adapter.AdaptTo;
 import io.wcm.sling.commons.request.RequestParam;
@@ -68,6 +71,8 @@ public final class ParsysComponentsServlet extends SlingSafeMethodsServlet {
 
   private static final Logger log = LoggerFactory.getLogger(ParsysComponentsServlet.class);
 
+  private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
   @Reference
   private AllowedComponentsProvider allowedComponentsProvider;
 
@@ -82,7 +87,7 @@ public final class ParsysComponentsServlet extends SlingSafeMethodsServlet {
     enabled = instanceTypeService.isAuthor();
   }
 
-  @SuppressWarnings({ "null", "deprecation" })
+  @SuppressWarnings("null")
   @Override
   protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
     if (!enabled) {
@@ -106,7 +111,7 @@ public final class ParsysComponentsServlet extends SlingSafeMethodsServlet {
 
     response.setContentType(ContentType.JSON);
 
-    org.apache.sling.commons.json.JSONArray allowedComponents = new org.apache.sling.commons.json.JSONArray();
+    Collection<String> allowedComponents = Collections.emptyList();
 
     String relativePath = RequestParam.get(request, RP_PATH);
     String resourceType = RequestParam.get(request, RP_RESOURCE_TYPE);
@@ -120,10 +125,10 @@ public final class ParsysComponentsServlet extends SlingSafeMethodsServlet {
         allowedComponentsRelative.add(ResourceType.makeAbsolute(allowedResourceType, resolver));
       }
 
-      allowedComponents = new org.apache.sling.commons.json.JSONArray(allowedComponentsRelative);
+      allowedComponents = allowedComponentsRelative;
     }
 
-    response.getWriter().write(allowedComponents.toString());
+    response.getWriter().write(OBJECT_MAPPER.writeValueAsString(allowedComponents));
 
     // output profiling info in DEBUG mode
     if (log.isDebugEnabled()) {
