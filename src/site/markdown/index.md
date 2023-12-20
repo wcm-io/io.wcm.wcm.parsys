@@ -30,7 +30,8 @@ Differences to the AEM-builtin paragraph system:
 
 |WCM Parsys version |AEM version supported
 |-------------------|----------------------
-|1.7.x or higher    |AEM 6.5.7+, AEMaaCS
+|1.7.4 or higher    |AEM 6.5.17+, AEMaaCS
+|1.7.0 - 1.7.2      |AEM 6.5.7+, AEMaaCS
 |1.6.x              |AEM 6.4.5+, AEMaaCS
 |1.4.x - 1.5.x      |AEM 6.3.3+, AEM 6.4.5+
 |1.2.x - 1.3.x      |AEM 6.2+
