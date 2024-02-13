@@ -27,7 +27,7 @@
       <action type="update" dev="sseifert">
         Switch to AEM 6.5.17 as minimum version.
       </action>
-      <action type="fix" dev="sseifert">
+      <action type="fix" dev="sseifert" issue="2">
         Ignore child resources of parsys without assigned resource type (returning nt:unstructured as resource type).
       </action>
     </release>
