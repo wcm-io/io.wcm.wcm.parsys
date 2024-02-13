@@ -27,6 +27,7 @@ import static io.wcm.wcm.parsys.ParsysNameConstants.PN_PARSYS_PARAGRAPH_NODECORA
 import static io.wcm.wcm.parsys.ParsysNameConstants.PN_PARSYS_PARAGRAPH_VALIDATE;
 import static io.wcm.wcm.parsys.ParsysNameConstants.PN_PARSYS_WRAPPER_CSS;
 import static io.wcm.wcm.parsys.ParsysNameConstants.PN_PARSYS_WRAPPER_ELEMENT;
+import static org.apache.jackrabbit.JcrConstants.NT_UNSTRUCTURED;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -157,6 +158,9 @@ public final class Parsys implements ContainerExporter {
       parsysParentResource = currentResource;
     }
     for (Resource childResource : parsysParentResource.getChildren()) {
+      if (!acceptResource(childResource)) {
+        continue;
+      }
       Item item = createResourceItem(childResource);
       if (wcmMode != WCMMode.DISABLED || item.isValid()) {
         items.add(item);
@@ -165,6 +169,11 @@ public final class Parsys implements ContainerExporter {
     if (wcmMode != WCMMode.DISABLED) {
       items.add(createNewAreaItem());
     }
+  }
+
+  private static boolean acceptResource(Resource resource) {
+    // skip resources without assigned resource type
+    return !StringUtils.equals(resource.getResourceType(), NT_UNSTRUCTURED);
   }
 
   private static boolean getDecoration(String[] paragraphNoDecorationWcmMode, WCMMode wcmMode) {
@@ -364,6 +373,9 @@ public final class Parsys implements ContainerExporter {
   private <T> Map<String, T> getChildModels(@NotNull Class<T> modelClass) {
     Map<String, T> models = new LinkedHashMap<>();
     for (Resource child : slingModelFilter.filterChildResources(currentResource.getChildren())) {
+      if (!acceptResource(child)) {
+        continue;
+      }
       T model = modelFactory.getModelFromWrappedRequest(request, child, modelClass);
       if (model != null) {
         models.put(child.getName(), model);
