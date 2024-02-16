@@ -122,6 +122,9 @@ class ParsysTest {
     par2Resource = context.create().resource(parsysResource.getPath() + "/par2",
         "sling:resourceType", COMPONENT_PATH_2,
         "valid", false);
+    // this should be always ignored as it does not contain a resource type
+    context.create().resource(parsysResource.getPath() + "/ignore1",
+        "valid", true);
 
     context.currentResource(parsysResource);
   }
@@ -315,7 +318,8 @@ class ParsysTest {
   void testOtherParentParsysResource() {
     context.create().resource("/apps/" + RESOURCE_TYPE_SAMPLE);
     parsysResource = context.create().resource(page.getContentResource().getPath() + "/parsysOther");
-    par1Resource = context.create().resource(parsysResource.getPath() + "/par1");
+    par1Resource = context.create().resource(parsysResource.getPath() + "/par1",
+        "sling:resourceType", RESOURCE_TYPE_SAMPLE);
 
     context.request().setAttribute(RA_PARSYS_PARENT_RESOURCE, parsysResource);
 
