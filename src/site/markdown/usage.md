@@ -14,7 +14,7 @@ To use the paragraph system in your sightly template:
 
 To define which components are allowed in your paragraph system you create a node `wcmio:parsysConfig` in your page component (similar to nodes like `cq:dialog` and `cq:editConfig`). Example:
 
-```json
+```json-jcr
 "wcmio:parsysConfig": {
   "jcr:primaryType": "nt:unstructured",
   "paths": {
@@ -97,7 +97,7 @@ You can set the following property in the component node of the paragraph system
 
 Example:
 
-```
+```json-jcr
 {
   "jcr:primaryType": "cq:Component",
   "sling:resourceSuperType": "wcm-io/wcm/parsys/components/parsys",
@@ -114,7 +114,7 @@ Notes:
 
 * The properties **wcmio:parsysParagraphCss** and **wcmio:parsysParagraphElement** do not work properly when inserting or editing components without configuring a REFRESH_PARENT event on the `afterinsert` and `afteredit` events for the child components. It is recommended to use `cq:htmlTag` definition on the parsys child components instead - example:
 
-```
+```json-jcr
 {
   "jcr:primaryType": "cq:Component",
   "jcr:title": "My Component",
