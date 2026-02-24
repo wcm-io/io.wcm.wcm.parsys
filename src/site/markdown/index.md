@@ -56,4 +56,4 @@ Sources: https://github.com/wcm-io/io.wcm.wcm.parsys
 
 [usage]: usage.html
 [apidocs]: apidocs/
-[changelog]: changes-report.html
+[changelog]: changes.html

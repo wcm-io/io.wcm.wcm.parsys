@@ -41,7 +41,6 @@ import io.wcm.wcm.parsys.componentinfo.ParsysConfig;
 
 /**
  * Reads paragraph system configuration from page component resource type definition in repository.
- * TODO: add caching for resolved parsys config from resource?
  */
 final class ResourceParsysConfigProvider {
 
