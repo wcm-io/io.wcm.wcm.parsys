@@ -88,9 +88,9 @@ class ParsysTest {
   private static final String SUPERCOMPONENT_PATH = "sample/components/super";
 
   private final AemContext context = new AemContextBuilder()
-      .plugin(WCMIO_SLING, WCMIO_WCM)
-      .registerSlingModelsFromClassPath(false)
-      .build();
+    .plugin(WCMIO_SLING, WCMIO_WCM)
+    .registerSlingModelsFromClassPath(false)
+    .build();
 
   private Page page;
   private Resource parsysResource;
@@ -106,6 +106,7 @@ class ParsysTest {
 
     context.registerService(SlingModelFilter.class, slingModelFilter);
     when(slingModelFilter.filterChildResources(any())).then(new Answer<Iterable<Resource>>() {
+
       @Override
       public Iterable<Resource> answer(InvocationOnMock invocation) throws Throwable {
         return invocation.getArgument(0);
@@ -169,7 +170,9 @@ class ParsysTest {
     assertTrue(item3.isNewArea());
 
     assertEquals(RESOURCE_TYPE_SAMPLE, parsys.getExportedType());
-    assertArrayEquals(new String[] { par1Resource.getName(), par2Resource.getName() }, parsys.getExportedItemsOrder());
+    assertArrayEquals(new String[] {
+        par1Resource.getName(), par2Resource.getName()
+    }, parsys.getExportedItemsOrder());
   }
 
   @Test
@@ -385,7 +388,9 @@ class ParsysTest {
   @Test
   void testComponentWithNoTagDecoration() {
     context.create().resource("/apps/" + RESOURCE_TYPE_SAMPLE,
-        PN_PARSYS_PARAGRAPH_NODECORATION_WCMMODE, new String[] { "edit" });
+        PN_PARSYS_PARAGRAPH_NODECORATION_WCMMODE, new String[] {
+            "edit"
+        });
 
     // prepare tag decoration for one component
     context.create().resource("/apps/sample/components/comp1/" + NameConstants.NN_HTML_TAG,
@@ -513,8 +518,12 @@ class ParsysTest {
 
 
   @Model(adaptables = Resource.class,
-      adapters = { ParsysItemModel.class, ParsysItem.class },
-      resourceType = { COMPONENT_PATH_1, COMPONENT_PATH_2 })
+      adapters = {
+          ParsysItemModel.class, ParsysItem.class
+      },
+      resourceType = {
+          COMPONENT_PATH_1, COMPONENT_PATH_2
+      })
   public static class ParsysItemModel implements ParsysItem {
 
     @ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
@@ -528,8 +537,12 @@ class ParsysTest {
   }
 
   @Model(adaptables = SlingHttpServletRequest.class,
-      adapters = { ParsysItemRequestModel.class, ParsysItem.class },
-      resourceType = { COMPONENT_REQUEST_PATH_1, COMPONENT_REQUEST_PATH_2 })
+      adapters = {
+          ParsysItemRequestModel.class, ParsysItem.class
+      },
+      resourceType = {
+          COMPONENT_REQUEST_PATH_1, COMPONENT_REQUEST_PATH_2
+      })
   public static class ParsysItemRequestModel implements ParsysItem {
 
     @ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)

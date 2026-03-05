@@ -74,7 +74,7 @@ class ParsysComponentsServletTest {
 
     when(allowedComponentsProvider.getAllowedComponents(any(Page.class),
         eq(LOCAL_PATH), eq(RESOURCE_TYPE), any(ResourceResolver.class)))
-            .thenReturn(new TreeSet<>(Set.of("sample/components/comp1", "sample/components/comp2")));
+          .thenReturn(new TreeSet<>(Set.of("sample/components/comp1", "sample/components/comp2")));
 
     context.registerService(AllowedComponentsProvider.class, allowedComponentsProvider);
   }

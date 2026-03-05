@@ -90,7 +90,7 @@ public final class OsgiParsysConfigProvider implements ParsysConfig {
         options = {
             @Option(value = "1", label = "Direct Parent (1)"),
             @Option(value = "2", label = "Grand Parent (2)")
-    })
+        })
     int parentAncestorLevel() default DEFAULT_PARENT_ANCESTOR_LEVEL;
 
     @AttributeDefinition(name = "Inherit",
@@ -218,8 +218,7 @@ public final class OsgiParsysConfigProvider implements ParsysConfig {
           this.deniedChildren,
           this.allowedParents,
           this.parentAncestorLevel,
-          this.inherit
-      );
+          this.inherit);
     }
 
     // validation messages

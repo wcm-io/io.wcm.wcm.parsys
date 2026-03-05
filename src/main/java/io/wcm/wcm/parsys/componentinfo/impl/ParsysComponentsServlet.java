@@ -63,6 +63,7 @@ import io.wcm.wcm.parsys.componentinfo.AllowedComponentsProvider;
     "sling.servlet.methods=" + HttpConstants.METHOD_GET
 })
 public final class ParsysComponentsServlet extends SlingSafeMethodsServlet {
+
   private static final long serialVersionUID = 1L;
 
   static final String RP_PATH = "path";
