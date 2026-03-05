@@ -36,8 +36,8 @@ public final class AppAemContext {
 
   public static AemContext newAemContext() {
     return new AemContextBuilder()
-        .plugin(WCMIO_SLING, WCMIO_WCM)
-        .build();
+      .plugin(WCMIO_SLING, WCMIO_WCM)
+      .build();
   }
 
 }

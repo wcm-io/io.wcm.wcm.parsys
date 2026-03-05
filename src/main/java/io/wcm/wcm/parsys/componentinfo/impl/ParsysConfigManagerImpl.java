@@ -71,15 +71,15 @@ public final class ParsysConfigManagerImpl implements ParsysConfigManager {
       @NotNull final ResourceResolver resolver) {
     Iterable<ParsysConfig> configs = getParsysConfigs(pageComponentPath, resolver);
     return IterableUtils.filteredIterable(configs, parsysConfig -> {
-        // sanity check
-        if (parsysConfig == null || parsysConfig.getPathPattern() == null) {
-          return false;
-        }
-        Pattern pathPattern = parsysConfig.getPathPattern();
-        if (pathPattern == null) {
-          return false;
-        }
-        return pathPattern.matcher(relativePath).matches();
+      // sanity check
+      if (parsysConfig == null || parsysConfig.getPathPattern() == null) {
+        return false;
+      }
+      Pattern pathPattern = parsysConfig.getPathPattern();
+      if (pathPattern == null) {
+        return false;
+      }
+      return pathPattern.matcher(relativePath).matches();
     });
   }
 

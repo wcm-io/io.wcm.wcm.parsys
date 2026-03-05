@@ -80,7 +80,9 @@ import io.wcm.wcm.parsys.ParsysItem;
  * and the new area.
  */
 @Model(adaptables = SlingHttpServletRequest.class,
-    adapters = { Parsys.class, ContainerExporter.class, ComponentExporter.class },
+    adapters = {
+        Parsys.class, ContainerExporter.class, ComponentExporter.class
+    },
     resourceType = Parsys.RESOURCE_TYPE)
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 @ProviderType
@@ -138,7 +140,7 @@ public final class Parsys implements ContainerExporter {
   private void activate() {
     // read customize properties from parsys component
     try (ComponentPropertyResolver componentPropertyResolver = componentPropertyResolverFactory.get(componentContext)
-        .componentPropertiesResolution(ComponentPropertyResolution.RESOLVE_INHERIT)) {
+      .componentPropertiesResolution(ComponentPropertyResolution.RESOLVE_INHERIT)) {
       generateDefaultCss = componentPropertyResolver.get(PN_PARSYS_GENERATE_DEAFULT_CSS, true);
       paragraphCss = componentPropertyResolver.get(PN_PARSYS_PARAGRAPH_CSS, String.class);
       newAreaCss = componentPropertyResolver.get(PN_PARSYS_NEWAREA_CSS, String.class);
@@ -194,7 +196,7 @@ public final class Parsys implements ContainerExporter {
     }
     css.add(paragraphCss);
 
-    Map<String,String> htmlTagAttrs = getComponentHtmlTagAttributes(resource.getResourceType());
+    Map<String, String> htmlTagAttrs = getComponentHtmlTagAttributes(resource.getResourceType());
 
     // apply html tag attributes from component definition
     String itemElementName = paragraphElementName;
@@ -215,10 +217,10 @@ public final class Parsys implements ContainerExporter {
     }
 
     return new Item(resource.getPath())
-        .elementName(itemElementName)
-        .cssClassName(css.build())
-        .decorate(paragraphDecoration)
-        .valid(valid);
+      .elementName(itemElementName)
+      .cssClassName(css.build())
+      .decorate(paragraphDecoration)
+      .valid(valid);
   }
 
   /**
@@ -227,7 +229,9 @@ public final class Parsys implements ContainerExporter {
    * @return if the return value is empty there is no model associated with this resource, or
    *         it does not support validation via {@link ParsysItem} interface. Otherwise it contains the valid status.
    */
-  @SuppressWarnings({ "null", "unused" })
+  @SuppressWarnings({
+      "null", "unused"
+  })
   private Optional<@NotNull Boolean> isParagraphValid(Resource resource) {
     // try to get model adapting from request associated with the resource implementing ParsysItem
     ParsysItem parsysItem = modelFactory.getModelFromWrappedRequest(request, resource, ParsysItem.class);
@@ -283,12 +287,12 @@ public final class Parsys implements ContainerExporter {
     String newAreaElementName = StringUtils.defaultString(paragraphElementName, DEFAULT_ELEMENT_NAME);
     String newAreaResourceType = getNewAreaResourceType(componentContext.getComponent().getPath());
     return new Item(NEWAREA_RESOURCE_PATH)
-        .newArea(true)
-        .resourceType(newAreaResourceType)
-        .elementName(newAreaElementName)
-        .style(style)
-        .cssClassName(css.build())
-        .decorate(true);
+      .newArea(true)
+      .resourceType(newAreaResourceType)
+      .elementName(newAreaElementName)
+      .style(style)
+      .cssClassName(css.build())
+      .decorate(true);
   }
 
   /**
