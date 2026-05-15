@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.jetbrains.annotations.NotNull;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -159,7 +160,7 @@ public final class OsgiParsysConfigProvider implements ParsysConfig {
     // alternative: use path to build a pattern
     else if (StringUtils.isNotBlank(path)) {
       // path may also contain a simple node name
-      if (!StringUtils.startsWith(path, JcrConstants.JCR_CONTENT + "/")) {
+      if (!Strings.CS.startsWith(path, JcrConstants.JCR_CONTENT + "/")) {
         path = JcrConstants.JCR_CONTENT + "/" + path; //NOPMD
       }
       this.pathPattern = Pattern.compile("^" + Pattern.quote(path) + "$");

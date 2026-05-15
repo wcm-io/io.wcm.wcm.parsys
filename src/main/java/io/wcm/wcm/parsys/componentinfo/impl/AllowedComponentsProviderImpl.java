@@ -26,6 +26,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.jetbrains.annotations.NotNull;
@@ -60,7 +61,7 @@ public final class AllowedComponentsProviderImpl implements AllowedComponentsPro
   public @NotNull Set<String> getAllowedComponents(@NotNull String resourcePath, @NotNull ResourceResolver resolver) {
     PageManager pageManager = AdaptTo.notNull(resolver, PageManager.class);
     Page page = pageManager.getContainingPage(resourcePath);
-    if (page == null && StringUtils.contains(resourcePath, "/" + JcrConstants.JCR_CONTENT)) {
+    if (page == null && Strings.CS.contains(resourcePath, "/" + JcrConstants.JCR_CONTENT)) {
       // if resource does not exist (e.g. inherited parsys) get page from resource path manually
       page = pageManager.getPage(StringUtils.substringBefore(resourcePath, "/" + JcrConstants.JCR_CONTENT));
     }

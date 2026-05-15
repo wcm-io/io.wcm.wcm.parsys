@@ -35,12 +35,14 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -175,13 +177,13 @@ public final class Parsys implements ContainerExporter {
 
   private static boolean acceptResource(Resource resource) {
     // skip resources without assigned resource type
-    return !StringUtils.equals(resource.getResourceType(), NT_UNSTRUCTURED);
+    return !Strings.CS.equals(resource.getResourceType(), NT_UNSTRUCTURED);
   }
 
   private static boolean getDecoration(String[] paragraphNoDecorationWcmMode, WCMMode wcmMode) {
     if (paragraphNoDecorationWcmMode != null && paragraphNoDecorationWcmMode.length > 0) {
       for (String wcmModeItem : paragraphNoDecorationWcmMode) {
-        if (StringUtils.equalsIgnoreCase(wcmMode.name(), wcmModeItem)) {
+        if (Strings.CI.equals(wcmMode.name(), wcmModeItem)) {
           return false;
         }
       }
@@ -201,7 +203,7 @@ public final class Parsys implements ContainerExporter {
     // apply html tag attributes from component definition
     String itemElementName = paragraphElementName;
     if (StringUtils.isEmpty(itemElementName)) {
-      itemElementName = StringUtils.defaultString(htmlTagAttrs.get(NameConstants.PN_TAG_NAME), DEFAULT_ELEMENT_NAME);
+      itemElementName = Objects.toString(htmlTagAttrs.get(NameConstants.PN_TAG_NAME), DEFAULT_ELEMENT_NAME);
     }
     if (StringUtils.isEmpty(paragraphCss)) {
       css.add(htmlTagAttrs.get("class"));
@@ -284,7 +286,7 @@ public final class Parsys implements ContainerExporter {
       css.add(SECTION_DEFAULT_CLASS_NAME);
     }
     css.add(newAreaCss);
-    String newAreaElementName = StringUtils.defaultString(paragraphElementName, DEFAULT_ELEMENT_NAME);
+    String newAreaElementName = Objects.toString(paragraphElementName, DEFAULT_ELEMENT_NAME);
     String newAreaResourceType = getNewAreaResourceType(componentContext.getComponent().getPath());
     return new Item(NEWAREA_RESOURCE_PATH)
       .newArea(true)
@@ -327,7 +329,7 @@ public final class Parsys implements ContainerExporter {
    */
   @JsonIgnore
   public String getWrapperElementName() {
-    return StringUtils.defaultString(wrapperElementName, DEFAULT_ELEMENT_NAME);
+    return Objects.toString(wrapperElementName, DEFAULT_ELEMENT_NAME);
   }
 
   /**

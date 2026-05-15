@@ -23,6 +23,7 @@ import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Names used for the parsys.
+ *
  * <p>
  * Conventions:
  * </p>
