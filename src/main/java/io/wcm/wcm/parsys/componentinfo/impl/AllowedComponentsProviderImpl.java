@@ -81,6 +81,7 @@ public final class AllowedComponentsProviderImpl implements AllowedComponentsPro
    * @return Component paths
    */
   @Override
+  @SuppressWarnings("java:S3776") // complexity
   public @NotNull Set<String> getAllowedComponents(@NotNull Page page, @NotNull String relativeResourcePath,
       @Nullable String resourceType, @NotNull ResourceResolver resolver) {
     Set<String> allowedComponents = new HashSet<>();

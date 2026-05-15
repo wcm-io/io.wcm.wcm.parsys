@@ -146,6 +146,9 @@ public final class OsgiParsysConfigProvider implements ParsysConfig {
   // --- SCR Integration ---
 
   @Activate
+  @SuppressWarnings({
+      "java:S3776", "java:S6541" // complexity
+  })
   private void activate(Config config) {
 
     this.pageComponentPath = config.pageComponentPath();
